@@ -1,0 +1,23 @@
+﻿<div class="col-md-3 col-12">
+    <div class="bg-dark rounded sticky-top p-2" id="sidebar" style="top: 74px; z-index:99;">
+        <div class="py-3 px-1 mb-0">
+            <h4 class="text-white font-weight-bold">CamHouse</h4>
+            <hr width="50" class="ml-0 mt-0" style="border-width: 3px; height: 3px; border-color: #ff6a00" />
+            <p class="text-light small">CamHouse là chuỗi thương hiệu phòng trọ, homestay với hơn 100 căn hộ trên toàn quốc. gì gì đó</p>
+            <a href="@Url.Action("Index", "Page", new { Page = 1 })" class="btn btn-outline-warning rounded-0 btn-sm">Tìm hiểu thêm</a>
+        </div>
+        <hr class="my-1 border-light" />
+        <div class="py-3 px-1 mt-0">
+            <h4 class="text-white font-weight-bold">DANH SÁCH CHUYÊN MỤC</h4>
+            <hr width="50" class="ml-0 mt-0" style="border-width: 3px; height: 3px; border-color: #ff6a00" />
+            <ul class="list-arrow mb-1">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <li>
+                        <a class="text-light" href="@Url.Action("Index","Blog",new {Category = item.BlogCategoryID })">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

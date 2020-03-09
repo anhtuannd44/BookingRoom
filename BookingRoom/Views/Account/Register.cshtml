@@ -1,0 +1,116 @@
+﻿@model BookingRoom.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Đăng Kí";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+<style>
+    #login-blog-form .col-md-12, #login-blog-form .col-md-6 {
+        margin-top: 10px;
+    }
+</style>
+<section class="login-block" id="login-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 login-sec p-3">
+                <h2 class="text-center mt-3 mb-2">Đăng Kí Tài Khoản Mới</h2>
+                @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row" id="login-blog-form">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label", placeholder = "VD: booking@gmail.com" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Gender, new { @class = "control-label" })
+                            <select class="form-control" name="Gender" id="Gender">
+                                <option value="0" checked>Chọn giới tính</option>
+                                <option value="1">Nam</option>
+                                <option value="2">Nữ</option>
+                            </select>
+                            <span class="field-validation-error text-danger" data-valmsg-for="Gender" data-valmsg-replace="true">@ViewBag.GenderErr</span>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Birthday, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", data_val_date = "Ngày sinh chưa đúng. VD: 01/01/1999", type="Date" })
+                            @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.Address, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="offset-md-3 col-md-6">
+                            <button type="submit" class="btn btn-login btn-block">Đăng Kí</button>
+                        </div>
+                    </div>
+                    <div class="register mt-3 text-center">
+                        <p>Bạn chưa có tài khoản?</p>
+                        @Html.ActionLink("Đăng Nhập Ngay", "Login")
+                    </div>
+                }
+            </div>
+            <div class="col-lg-6 banner-sec">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-1">
+        <div class="row mt-3">
+            <div class="col-md-12 mt-4">
+                <h3 class="text-center">Chúng tôi cam kết bảo vệ tính bảo mật của Quý vị.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <dl>
+                    <dt>Hãy giữ bí mật thông tin đăng nhập của Quý vị.</dt>
+                    <dd>Vì Quý vị được quyền biết các thông tin nhạy cảm của khách hàng, nên chúng tôi yêu cầu Quý vị giữ tên đăng nhập và mật khẩu của mình tuyệt đối bí mật.</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Truy cập trang web của chúng tôi một cách an toàn.</dt>
+                    <dd>Dù Quý vị có sử dụng Chrome, Firefox, Internet Explorer hay bất cứ trình duyệt nào khác, đường dẫn URL của Quý vị phải luôn luôn là <strong>https://localhost:.../..</strong>.</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Cẩn trọng hơn nữa.</dt>
+                    <dd>Tùy vào trình duyệt sử dụng, có thể Quý vị sẽ thấy một số dấu hiệu bảo mật tăng cường - thanh địa chỉ web sẽ có màu xanh lá hoặc xuất hiện biểu tượng ổ khóa.</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")

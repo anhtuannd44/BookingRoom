@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BookingRoom.Models.Page>
+
+@{
+    ViewBag.Title = "ListPage";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+    var i = 1;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-3">
+                    <a href="@Url.Action("CreatePage", "Admin")" class="btn btn-success rounded-0 btn-sm">Tạo Trang Mới</a>
+                </h4>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="text-center bg-dark text-light">
+                            <th> # </th>
+                            <th> Tiêu Đề </th>
+                            <th> Hành Động </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center"> @i </td>
+                                <td>@item.Title</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("PageEdit", "Admin", new { Page = item.PageID })" class="btn btn-sm btn-info">Chỉnh Sửa</a>
+                                    |
+                                    <a href="@Url.Action("DeletePage", "Admin", new { Page = item.PageID })" class="btn btn-sm btn-danger">Xóa</a>
+                                    |
+                                    <a href="@Url.Action("Index", "Page", new { Page = item.PageID })" class="btn btn-sm btn-success">Xem Trang</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 

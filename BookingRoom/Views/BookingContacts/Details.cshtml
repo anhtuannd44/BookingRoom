@@ -1,0 +1,83 @@
+﻿@model BookingRoom.Models.BookingContact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookingContact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Messeger)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Messeger)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingContactID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

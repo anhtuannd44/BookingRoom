@@ -1,0 +1,51 @@
+﻿@model BookingRoom.Models.TypeOfRoom
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TypeOfRoom</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SingleBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SingleBed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwinBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwinBed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOMBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOMBed)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TypeOfRoomID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

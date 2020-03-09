@@ -1,0 +1,21 @@
+﻿@model BookingRoom.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9 col-12">
+            <div class="text-center">
+                <h3 class="font-weight-bold text-dark">@Model.Title</h3>
+                Chuyên Mục: <a href="@Url.Action("Index","Blog",new {Category = Model.BlogCategoryID })" class="text-primary">@Model.BlogCategory.Name</a>
+                <p class="small">Đăng bởi CamHouse - @Model.TimeModified.ToString("dd/MM/yyyy")</p>
+            </div>
+            <div class="blog-content">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+        @Html.Partial("Home/_SidebarBlogPartial")
+    </div>
+</div>

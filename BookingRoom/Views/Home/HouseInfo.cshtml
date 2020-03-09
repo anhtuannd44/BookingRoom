@@ -1,0 +1,305 @@
+﻿@model IEnumerable<BookingRoom.Models.Room>
+@{
+    ViewBag.Title = "Thông Tin Nhà Nghỉ";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row m-0">
+        <div class="col-md-9 p-0 shadow">
+            <div class="row m-0">
+                <div class="col-md-12" style="padding: 1px;">
+                    <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+                        <!--Slides-->
+                        <div class="carousel-inner" role="listbox">
+                            @foreach (var item in ViewBag.HousePicture)
+                            {
+                                if (item.IsMainPicture == true)
+                                {
+                                    <div class="carousel-item active">
+                                        <div class="image-box ratio-16-6">
+                                            <div class="image image-big border border-right-0 rounded" id="image-main" style="background-image: url('../../Content/images/Hotel/@item.Name');" alt="@item.ID"></div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <div class="image-box ratio-16-6">
+                                            <div class="image image-big  border border-right-0 rounded" id="image-main" style="background-image: url('../../Content/images/Hotel/@item.Name');" alt="@item.ID"></div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0">
+                <!--/.Controls-->
+                @{ var i = 0;}
+                @foreach (var item in ViewBag.HousePicture)
+                {
+                    if (item.IsMainPicture == true)
+                    {
+                        <div data-target="#carousel-thumb" data-slide-to="@i" class="active col-md-2" style="padding: 1px;">
+                            <div class="image-box ratio-16-6  border border-right-0 rounded">
+                                <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Hotel/@item.Name');" alt="@item.ID"></div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div data-target="#carousel-thumb" data-slide-to="@i" class="col-md-2" style="padding: 1px;">
+                            <div class="image-box ratio-16-6  border border-right-0 rounded">
+                                <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Hotel/@item.Name');" alt="@item.ID"></div>
+                            </div>
+                        </div>
+                    }
+                    i++;
+                }
+            </div>
+        </div>
+        <div class="col-md-3 shadow">
+            <div class="row bg-white h-100">
+                <div class="col-md-12 h-100 border rounded">
+                    <h4 class="font-weight-bold text-center text-primary mt-3 mb-1">@ViewBag.HouseInfo.Name</h4>
+                    <div class="star mb-1">
+                        <div class="text-center mr-2">
+                            <i class="mdi mdi-star text-warning"></i>
+                            <i class="mdi mdi-star text-warning"></i>
+                            <i class="mdi mdi-star text-warning"></i>
+                        </div>
+                    </div>
+
+                    <div class="text-info small font-weight-bold d-flex">
+                        <i class="mdi mdi-map-marker-multiple text-dark mr-1" style="font-size: 120%;"></i>
+                        @ViewBag.HouseInfo.Street, @ViewBag.HouseInfo.Ward, @ViewBag.HouseInfo.District, @ViewBag.HouseInfo.Province
+                    </div>
+
+                    <hr width="30%" class="ml-0 my-2" />
+                    <div class="service mt-1">
+                        <div class="service-title">
+                            <h5 class="small font-weight-bold mb-1">Dịch Vụ Nổi Bật</h5>
+                        </div>
+
+                        <div class="service-des">
+                            @{ var CountService = 1;}
+                            @foreach (var item in ViewBag.Service)
+                            {
+                                <span class="badge badge-outline-success">@item.Service.Name</span>
+                                CountService++;
+                                if (CountService == 4)
+                                {
+                                    break;
+                                }
+                            }
+                            <span class="badge badge-outline-success">4+</span>
+                        </div>
+                    </div>
+                    <hr width="30%" class="ml-0 my-2" />
+                    <div class="payment">
+                        <div class="service-title">
+                            <h5 class="small font-weight-bold mb-1">Dịch Vụ Thanh Toán</h5>
+                        </div>
+                        <h5 class="m-0 small">
+                            <i class="mdi mdi-credit-card"></i>
+                            Không cần thẻ tín dụng
+                        </h5>
+                        <h5 class="m-0 small">
+                            <i class="mdi mdi-cash-usd"></i>
+                            Thanh toán khi trả phòng
+                        </h5>
+                    </div>
+                    <hr width="30%" class="ml-0 my-1" />
+                    <div class="other-service mt-0">
+                        <a href="#" class="small font-weight-bold">Xem Thêm Dịch Vụ</a>
+                    </div>
+                    <div class="row py-3 border-top mt-1">
+                        <div class="col-md-9 text-right mt-1">
+                            <h5 class="font-weight-bold mb-0">Rất Tốt</h5>
+                            <p class="text-muted mb-0 small font-weight-bold">155 Nhận Xét</p>
+                        </div>
+                        <div class="col-md-3 justify-content-center">
+                            <button type="button" style="font-size: 18px" class="border btn btn-gradient-info btn-rounded btn-icon font-weight-bold">
+                                7.5
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row mt-5 bg-white m-0 rounded shadow" style="border:1px solid #c1c1c1 !important">
+            <div class="col-12">
+                <h4 class="font-weight-bold mb-1 mt-3">@item.TypeOfRoom.Name</h4>
+                <h5 class="small text-danger font-weight-bold mb-4">Mới đặt 9 phút trước</h5>
+            </div>
+            <div class="col-12 bg-light">
+                <div class="row m-0">
+                    <div class="col-md-4 col-12 mb-2">
+                        <div class="row table-header bg-light py-3">
+                            <div class="col-12">
+                                <h5 class="font-weight-bold m-0">Loại phòng</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="padding:0; margin: 0 -10px;">
+                            <div class="col-md-12 col-8" style="padding: 1px;">
+                                <div class="image-box ratio-16-9">
+                                    @{var picturemain = "default.jpg";
+                                        if (ViewBag.RoomPicture != null)
+                                        {
+                                            foreach (var roompicture in ViewBag.RoomPicture)
+                                            {
+                                                if (roompicture.IsMainPicture == true && item.RoomID == roompicture.RoomID)
+                                                {
+                                                    picturemain = roompicture.Name;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    <a href="#" class="image image-big" id="image-main" style="background-image: url('../../Content/images/Room/@picturemain');"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-4">
+                                <div class="row">
+                                    @if (ViewBag.RoomPicture != null)
+                                    {
+                                        foreach (var roompicture in ViewBag.RoomPicture)
+                                        {
+                                            if (roompicture.RoomID == item.RoomID)
+                                            {
+                                                <div class="col-md-4 col-6" style="padding: 1px;">
+                                                    <div class="image-box ratio-16-6">
+                                                        <a href="#" class="image image-big" id="image-main" style="background-image: url('../../Content/images/Room/@roompicture.Name');"></a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 bg-white border-left-md border-bottom mb-2">
+                        <div class="row table-header py-3 bg-light">
+                            <div class="col-12">
+                                <h5 class="font-weight-bold m-0">Giá này đã bao gồm</h5>
+                            </div>
+                        </div>
+                        <div class="row border-top">
+                            <div class="col-6">
+                                <p class="font-weight-bold mb-1 mt-2">Tiện nghi</p>
+                                <h6 class="minprice mb-1">
+                                    <i class="mdi mdi-seat-individual-suite text-success"></i>
+                                    @if (item.TypeOfRoom.SingleBed != 0)
+                                    {
+                                        @item.TypeOfRoom.SingleBed @: giường đơn
+                                        if (item.TypeOfRoom.TwinBed != 0)
+                                        {
+                                            @:, @item.TypeOfRoom.TwinBed giường đôi
+                                        }
+                                        if (item.TypeOfRoom.DOMBed != 0)
+                                        {
+                                            @:, @item.TypeOfRoom.DOMBed giường DOM
+                                        }
+                                    }
+                                    else if (item.TypeOfRoom.TwinBed != 0)
+                                    {
+                                        @item.TypeOfRoom.TwinBed @:giường đôi
+                                        if (item.TypeOfRoom.DOMBed != 0)
+                                        {
+                                            @:, @item.TypeOfRoom.DOMBed giường DOM
+                                        }
+                                    }
+                                    else if (item.TypeOfRoom.DOMBed != 0)
+                                    {
+                                        @item.TypeOfRoom.DOMBed @:giường DOM
+                                    }
+                                </h6>
+                                <h6 class="minprice mb-1">
+                                    <i class="mdi mdi-select text-success"></i> Diện tích phòng: @item.Area m<sup>2</sup>
+                                </h6>
+                                <h6 class="minprice mb-1">
+                                    <i class="mdi mdi-smoking-off text-success"></i> Phòng không hút thuốc
+                                </h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="font-weight-bold mb-1 mt-2">Lợi ích</p>
+                                @foreach (var service in ViewBag.Service)
+                                {
+                                    <h6 class="minprice mb-1">
+                                        <i class="mdi mdi-checkbox-marked-circle-outline text-success"></i> @service.Service.Name
+                                    </h6>
+                                }
+                            </div>
+                        </div>
+                        <hr width="30%" class="ml-0 my-1" />
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="font-weight-bold mb-1 mt-2">Sức chứa</p>
+                                <h6 class="minprice mb-1">
+                                    <i class="mdi mdi-human-handsdown text-success"></i> 2 người lớn
+                                </h6>
+                                <h6 class="minprice mb-1">
+                                    <i class="mdi mdi-human-child text-success"></i> 2 trẻ em
+                                </h6>
+                                @if (item.MaxChildren != 0)
+                                {
+                                    <h6 class="minprice mb-1">
+                                        <i class="mdi mdi-checkbox-marked-circle-outline text-success"></i> @item.MaxChildren trẻ em dưới 7 tuổi được miễn phí
+                                    </h6>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-white border-left-md border-right-md border-bottom mb-2">
+                        <div class="row table-header py-3 bg-light">
+                            <div class="col-12">
+                                <h5 class="font-weight-bold m-0">Giá phòng</h5>
+                            </div>
+                        </div>
+                        <div class="row border-top">
+                            <div class="col-12">
+                                @if (ViewBag.MinPrice == item.RoomID)
+                                {
+                                    <h5 class="minprice text-primary font-weight-bold mt-2 text-right">
+                                        <i class="mdi mdi-check-circle text-primary"></i> Giá thấp nhất!
+                                    </h5>
+                                }
+                                <div class="discount row mt-2">
+                                    <div class="col-12">
+                                        <h3 class="btn btn-sm btn-danger rounded float-right px-2 py-1">-25% DUY NHẤT HÔM NAY</h3>
+                                    </div>
+                                </div>
+                                <hr width="30%" class="mr-0 my-1" />
+                                <div class="price text-right">
+                                    <p class="small mb-1 text-muted">Giá thấp nhất chỉ từ</p>
+                                    <h4 class="text-dark mb-1"><del>@String.Format("{0:0,0 ₫}", 1200000)</del></h4>
+                                    <h3 class="text-primary font-weight-bold">@String.Format("{0:0,0 ₫}", item.Price)</h3>
+                                </div>
+                                <hr class="mr-0 my-1" />
+                                <div class="booking mt-3">
+                                    <a href="@Url.Action("RoomBookingInfo","Order",new {RoomID = item.RoomID })" class="btn btn-md btn-success btn-block mb-2">Đặt Phòng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

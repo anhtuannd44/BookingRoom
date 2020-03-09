@@ -1,0 +1,63 @@
+﻿@model BookingRoom.Models.LoginViewModel
+
+<section>
+    <div class="modal fade p-0" id="login">
+        <div class="modal-dialog">
+            <div class="modal-content bg-white px-4 py-3">
+                <div class="modal-header py-2">
+                    <h4 class="modal-title font-weight-bold text-primary">Đăng Nhập</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center mt-4 mb-5">
+                                <h4>Cảm thấy ghi nhớ mật khẩu thật rắc rối?</h4>
+                                <h6 class="font-weight-light">Hãy đăng nhập bằng Facebook nhé!</h6>
+                            </div>
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Mật Khẩu" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input" name="RememberMe" id="RememberMe"> Ghi nhớ đăng nhập <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                    <a href="#" class="auth-link text-black">Quên mật khẩu?</a>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">Đăng Nhập</button>
+                                </div>
+                            }
+                            <div class="my-2">
+                                <button type="button" class="btn btn-block btn-facebook auth-form-btn">
+                                    <i class="mdi mdi-facebook mr-2"></i>Đăng Nhập qua Facebook
+                                </button>
+                            </div>
+                            <div class="text-center mt-4 font-weight-light">
+                                Bạn chưa có tài khoản? <a href="#register" class="text-primary m-auto" data-toggle="modal" data-target="#register">
+                                    Tạo tài khoản
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

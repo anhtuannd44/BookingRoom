@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BookingRoom.Models.Blog>
+
+@{
+    ViewBag.Title = "Tin Tức";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9 col-12 bg-white rounded">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-dark text-center font-weight-bold my-4">@ViewBag.CategoryTitle</h3>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body text-center p-0 blog-card rounded border">
+                                <div class="mb-2 p-0">
+                                    <div class="image-box ratio-16-9 rounded">
+                                        <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Blog/@item.Cover');"></div>
+                                    </div>
+                                </div>
+                                <div class="card-content p-2 mb-3">
+                                    <p class="card-description mb-2 bt-0 small">Đăng bởi CamHouse - @item.TimeModified.ToString("dd/MM/yyyy")</p>
+                                    <a href="@Url.Action("BlogDetails", "Blog", new { BlogID = item.BlogID })" class="text-primary h4">@item.Title</a>
+                                    <hr width="10%" class="my-1" />
+                                    <p class="text-dark blog-shortdescription">@item.ShortDescription</p>
+                                    <a href="@Url.Action("BlogDetails", "Blog", new { BlogID = item.BlogID })" class="btn btn-outline-primary rounded-0 btn-sm">Xem Thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @Html.Partial("Home/_SidebarBlogPartial")
+    </div>
+</div>

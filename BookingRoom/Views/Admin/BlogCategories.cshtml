@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BookingRoom.Models.BlogCategory>
+
+@{
+    ViewBag.Title = "Chuyên Mục";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+    var i = 1;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-danger">@ViewBag.Noti</p>
+                <h4 class="card-title mb-3">
+                    <a href="@Url.Action("CreateBlogCategory", "Admin")" class="btn btn-primary btn-sm">Tạo Chuyên Mục Mới</a>
+                </h4>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="text-center bg-dark text-light">
+                            <th> # </th>
+                            <th> Tên Chuyên Mục </th>
+                            <th> Hành Động </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center"> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("EditBlogCategory", "Admin", new { BlogCategoryID = item.BlogCategoryID })" class="btn btn-sm btn-info">Chỉnh Sửa</a>
+                                    |
+                                    <a href="@Url.Action("DeleteBlogCategory", "Admin", new { BlogCategoryID = item.BlogCategoryID })" class="btn btn-sm btn-danger">Xóa</a>
+                                </td>
+                                
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

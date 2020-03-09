@@ -1,0 +1,92 @@
+﻿@model BookingRoom.Models.Blog
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Bài Viết";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("EditBlog", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <hidden typeof="date" name="LastUpdate" value="12/12/2019"></hidden>
+                    <hidden typeof="date" name="Status" value="true"></hidden>
+                    @Html.HiddenFor(model => model.BlogID)
+                    @Html.HiddenFor(model => model.Cover)
+                    @Html.HiddenFor(model => model.TimeModified)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "col-form-label" })
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "col-form-label" })
+                                    <textarea name="ShortDescription" id="ShortDescription"  style="width: 100%" rows="6">@Model.ShortDescription</textarea>
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    @Html.LabelFor(model => model.BlogCategoryID, "Chuyên Mục", htmlAttributes: new { @class = "col-form-label" })
+                                    @Html.DropDownList("BlogCategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BlogCategoryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-form-label" for="CoverPicture">Hình đại diện</label>
+                                <div class="row">
+                                    <div class="col-8 p-0">
+                                        <input type="file" name="CoverPicture" class="file-upload-default" accept=".png, .jpg, .jpeg">
+                                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Chấp nhận JPG, PNG, JPEG">
+                                    </div>
+                                    <div class="input-group-append col-4 p-0">
+                                        <button class="file-upload-browse btn-sm btn-block btn btn-gradient-primary" type="button">Chọn Hình</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-3 p-0">
+                                    <div class="image-box ratio-16-9 rounded">
+                                        <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Blog/@Model.Cover');"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <textarea name="Content" id="editor" placeholder="Nhập nội dung tại đây">@Model.Content</textarea>
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input type="submit" value="Hoàn Tất" class="btn btn-primary" />
+                            @Html.ActionLink("Quay Lại", "Blogs", "Admin", null, new { @class = "btn btn-secondary ml-2" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor', {
+      width: '100%',
+      height: 500
+    });
+
+</script>

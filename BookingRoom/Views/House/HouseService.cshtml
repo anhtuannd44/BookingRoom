@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BookingRoom.Models.ServiceHouseViewModel>
+
+@{
+    ViewBag.Title = "Dịch Vụ";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("UpdateHouseService", "House", new { HouseID = ViewBag.HouseID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group row shadow bg-light py-3 rounded">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <label class="col-sm-5 col-6 col-form-label">@item.Name</label>
+                            @if (item.IsHouseService == true)
+                            {
+                                <div class="col-sm-2 col-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="@item.ServiceID" id="@item.ServiceID" value="true" checked="">Có<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="@item.ServiceID" id="@item.ServiceID" value="false">Không<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-2 col-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="@item.ServiceID" id="@item.ServiceID" value="true">Có<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="@item.ServiceID" id="@item.ServiceID" value="false" checked="">Không<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+            <a href="@Url.Action("HouseDetail","House",new {HouseID = ViewBag.HouseID })" class="btn btn-secondary">Quay Lại</a>
+        </div>
+    </div>
+}

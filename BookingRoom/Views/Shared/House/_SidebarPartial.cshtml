@@ -1,0 +1,85 @@
+﻿@{
+    var UserName = User.Identity.Name;
+}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                    <img src="~/Content/images/faces/face1.jpg" alt="profile">
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">@UserName</span>
+                    <span class="text-secondary text-small">Đang sở hữu 3 căn</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index","House")">
+                <span class="menu-title">Quản Trị</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Houses","House")">
+                <span class="menu-title">Nhà Của Bạn</span>
+                <i class="mdi mdi-home-modern menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#statistical" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Thống Kê</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-book-open menu-icon"></i>
+            </a>
+            <div class="collapse" id="statistical">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Tất Cả</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Ngắn Hạn</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Dài Hạn</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Báo Cáo Tài Chính</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+            </a>
+            <div class="collapse" id="report">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Hóa Đơn</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Sao Kê Đặt Phòng</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Tổng Quan Tài Chính</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+                <span class="menu-title">Đánh Giá Khách Hàng</span>
+                <i class="mdi mdi-nature-people menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+                <span class="menu-title">Cộng Đồng Chủ Nhà</span>
+                <i class="mdi mdi-vector-union menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+                <span class="menu-title">Chính Sách</span>
+                <i class="mdi mdi-image-filter-none menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+                <span class="menu-title">Liên Hệ</span>
+                <i class="mdi mdi-contact-mail menu-icon"></i>
+            </a>
+        </li>
+    </ul>
+</nav>

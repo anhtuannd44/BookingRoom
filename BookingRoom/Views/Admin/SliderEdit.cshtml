@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BookingRoom.Models.Slider>
+
+@{
+    ViewBag.Title = "Chỉnh sửa Slider";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+<p class="text-success">@ViewBag.Noti</p>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">@item.SliderID</h4>
+                    <hr>
+                    <div class="col-md-12 col-12 p-1 mb-3">
+                        <div class="image-box ratio-16-9 rounded">
+                            <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Slider/@ViewData[item.SliderID]');"></div>
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("SliderEdit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input hidden name="SliderID" id="SliderID" value="@item.SliderID" />
+                        <div class="form-group">
+                            <label>Hình Ảnh (Tỉ lệ đẹp: 1440x600)</label>
+                            <input type="file" name="Picture" class="file-upload-default" accept=".png, .jpg, .jpeg">
+                            <div class="input-group col-xs-12">
+                                <input type="text" class="form-control file-upload-info" disabled="" placeholder="Chấp nhận JPG, PNG, JPEG">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn-sm btn btn-gradient-primary" type="button">Chọn Hình</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Title">Tiêu đề</label>
+                            <input class="form-control text-box single-line" id="Title" name="Title" type="text" value="@item.Title">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Content">Nội Dung</label>
+                            <textarea class="form-control" id="Content" name="Content" value="@item.Content" rows="3">@item.Content</textarea>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Content" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ButtonContent1">Nội dung Button 1</label>
+                            <input class="form-control text-box single-line" id="ButtonContent1" name="ButtonContent1" type="text" value="@item.ButtonContent1">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ButtonContent1" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ButtonLink1">Link Button 1</label>
+                            <input class="form-control text-box single-line" id="ButtonLink1" name="ButtonLink1" type="text" value="@item.ButtonLink1">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ButtonLink1" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ButtonContent2">Nội dung Button 2</label>
+                            <input class="form-control text-box single-line" id="ButtonContent2" name="ButtonContent2" type="text" value="@item.ButtonContent2">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ButtonContent2" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ButtonLink2">Link Button 2</label>
+                            <input class="form-control text-box single-line" id="ButtonLink2" name="ButtonLink2" type="text" value="@item.ButtonLink2">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ButtonLink2" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Status">Trạng Thái</label>
+                            <select class="form-control" id="Status" name="Status">
+                                @if (item.Status == true)
+                                {
+                                    <option value="true" selected="">Sẵn Sàng</option>
+                                    <option value="false">Tắt Slider</option>
+                                }
+                                else
+                                {
+                                    <option value="true">Sẵn Sàng</option>
+                                    <option value="false" selected>Tắt Slider</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cập Nhật" class="btn btn-primary">
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

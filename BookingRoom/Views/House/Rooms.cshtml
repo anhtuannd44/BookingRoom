@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookingRoom.Models.Room>
+
+@{
+    ViewBag.Title = "Phòng Của Bạn";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+    var dem = 0;
+    var PictureUrl = "default.jpg";
+}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="@Url.Action("CreateRoom", "House", new { HouseID = ViewBag.HouseID })" class="btn btn-sm btn-google btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i> Thêm Phòng Của Bạn
+        </a>
+        <p class="text-danger">@ViewBag.Noti</p>
+    </div>
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3 col-6 mb-4">
+            <div class="card bg-light shadow">
+                <div class="product-grid7">
+                    @foreach (var i in ViewBag.Picture)
+                    {
+                        if (item.RoomID == i.RoomID)
+                        {
+                            dem++;
+                            PictureUrl = i.Name;
+                            break;
+                        }
+                    }
+                    <div class="product-image7 rounded-top" style="background-image: url('../../Content/images/Room/@PictureUrl');">
+                        <ul class="social">
+                            <li><a href="@Url.Action("RoomDetail","House", new {roomid = item.RoomID })" data-tip="Xem Phòng"><i class="mdi mdi-hospital-building"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content p-2">
+                        <h4 class="title"><a href="@Url.Action("RoomDetail","House", new {roomid = item.RoomID })" class="text-primary">@Html.DisplayFor(modelItem => item.Name)</a></h4>
+                        <div class="description">
+                            <h5>Giá: <span class="text-danger">@String.Format("{0:0,0 VNĐ}", item.Price)</span></h5>
+                            <p class="small mb-1">@item.TypeOfRoom.Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        PictureUrl = "default.jpg";
+    }
+</div>

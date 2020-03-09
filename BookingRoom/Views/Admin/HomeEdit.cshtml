@@ -1,0 +1,91 @@
+﻿@model BookingRoom.Models.Homepage
+
+@{
+    ViewBag.Title = "Cài Đặt Thông Tin Homepage";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Chỉnh sửa thông tin sau đó nhấn "Cập Nhật" để thay đổi</h4>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.HomepageID)
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Hotline, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Hotline, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Hotline, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.FacebookLink, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.FacebookLink, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FacebookLink, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.YoutubeLink, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.YoutubeLink, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.YoutubeLink, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.GoogleLink, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.GoogleLink, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GoogleLink, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="offset-3 col-sm-9">
+                            <p class="text-success">@ViewBag.Noti</p>
+                            <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                            @Html.ActionLink("Quay Lại", "Index", "Admin", null, new { @class = "btn btn-secondary ml-2" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hướng Dẫn</h4>
+                <ul class="list-arrow">
+                    <li>Điền đầy đủ thông tin các mục sau đó nhấn Tạo Nhà Nghỉ để hoàn tất đăng ký nhà nghỉ của bạn.</li>
+                    <li>Kiểm tra đầy đủ thông tin chính xác, vì đây là quyền lợi cũng như thông tin để khách hàng tìm thấy bạn.</li>
+                    <li>Chúng tôi sẽ tiến hành kiểm duyệt và cho phép nhà nghỉ bạn xuất hiện sớm nhất.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

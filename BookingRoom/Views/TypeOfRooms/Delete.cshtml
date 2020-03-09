@@ -1,0 +1,57 @@
+﻿@model BookingRoom.Models.TypeOfRoom
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TypeOfRoom</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SingleBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SingleBed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwinBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwinBed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOMBed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOMBed)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

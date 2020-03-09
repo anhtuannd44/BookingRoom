@@ -1,0 +1,95 @@
+﻿@model BookingRoom.Models.LoginViewModel
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+
+<section class="login-blocK">
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth pt-0">
+                <div class="row flex-grow">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left p-5 ">
+                            <h4 class="text-center mb-5">Đăng Nhập CamHouse!</h4>
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Mật Khẩu" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-check">
+                                    <div class="my-2 d-flex justify-content-between align-items-center">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" class="form-check-input"> Giữ tôi luôn đăng nhập <i class="input-helper"></i>
+                                            </label>
+                                        </div>
+                                        <a href="#" class="auth-link text-black">Quên Mật Khẩu?</a>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Đăng Nhập</button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2">
+                                    <button type="button" class="btn btn-block btn-facebook auth-form-btn px-0">
+                                        <i class="mdi mdi-facebook mr-2"></i>Đăng Nhập Bằng Facebook
+                                    </button>
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Bạn chưa có tài khoản? <a href="#" class="text-primary">Tạo Ngay</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+
+
+
+    <div class="container my-3">
+        <div class="row my-3">
+            <div class="col-md-12 mt-4">
+                <h3 class="text-center">Chúng tôi cam kết bảo vệ tính bảo mật của Quý vị</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <dl>
+                    <dt>Hãy giữ bí mật thông tin của Quý vị</dt>
+                    <hr />
+                    <dd>Vì Quý vị được quyền biết các thông tin nhạy cảm của khách hàng, nên chúng tôi yêu cầu Quý vị giữ tên đăng nhập và mật khẩu của mình tuyệt đối bí mật.</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Truy cập trang web một cách an toàn</dt>
+                    <hr />
+                    <dd>Dù Quý vị có sử dụng Chrome, Firefox, Internet Explorer hay bất cứ trình duyệt nào khác, đường dẫn URL của Quý vị phải luôn luôn là <strong>https://camhouse.vn/.../..</strong>.</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Cẩn trọng hơn nữa</dt>
+                    <hr />
+                    <dd>Tùy vào trình duyệt sử dụng, có thể Quý vị sẽ thấy một số dấu hiệu bảo mật tăng cường - thanh địa chỉ web sẽ có màu xanh lá hoặc xuất hiện biểu tượng ổ khóa.</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+}

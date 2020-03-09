@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BookingRoom.Models.TypeOfRoom>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SingleBed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TwinBed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOMBed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SingleBed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TwinBed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOMBed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TypeOfRoomID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TypeOfRoomID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TypeOfRoomID })
+        </td>
+    </tr>
+}
+
+</table>

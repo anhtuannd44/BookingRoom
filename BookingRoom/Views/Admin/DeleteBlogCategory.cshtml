@@ -1,0 +1,38 @@
+﻿@model BookingRoom.Models.BlogCategory
+
+@{
+    ViewBag.Title = "DeleteBlogCategory";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4>Bạn thực sự muốn xóa chuyên mục này?</h4>
+                <p class="text-danger">Lưu ý: Mọi bài viết thuộc chuyên mục này sẽ được đưa vào Chuyên Mục <b>"Chưa Phân Loại"</b></p>
+                <hr />
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                    </dl>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Đồng Ý Xóa" class="btn btn-primary btn-sm" />
+                            <a href="@Url.Action("BlogCategories","Admin")" class="btn btn-secondary btn-sm">Quay Lại</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

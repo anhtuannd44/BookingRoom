@@ -1,0 +1,83 @@
+﻿@model BookingRoom.Models.House
+
+@{
+    ViewBag.Title = "Chi Tiết Nhà Nghỉ";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-6 col-12">
+        <div class="container shadow">
+            <div class="row main-image">
+                <div class="col-md-12 col-12 p-1">
+                    <div class="image-box ratio-16-9">
+                        <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Hotel/@ViewBag.MainPicture');"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-image">
+                @if (ViewBag.MainPicture != "default.jpg")
+                {
+                    foreach (var item in ViewBag.Picture)
+                    {
+                        <div class="col-2 p-1">
+                            <div class="image-box ratio-16-9">
+                                <div class="image image-small" id="image-1" style="background-image: url('../../Content/images/Hotel/@item.Name');"></div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="font-weight-bold text-primary">@Html.DisplayFor(model => model.Name)</h3>
+                <hr />
+                <p class="card-description small">@Html.DisplayFor(model => model.Intro)</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-arrow">
+                            <li>
+                                <span class="font-weight-bold">Số Phòng Hiện Có:</span> @Model.Room.Where(a=>a.HouseID==Model.HouseID).Count() phòng
+                            </li>
+                            <li>
+                                <span class="font-weight-bold">Điện Thoại:</span> @Html.DisplayFor(model => model.PhoneNumber)
+                            </li>
+                            <li>
+                                <span class="font-weight-bold">Email:</span> ahihi@gmail.com
+                            </li>
+                            <li>
+                                <span class="font-weight-bold">Địa Chỉ:</span> @Html.DisplayFor(model => model.Street), @Html.DisplayFor(model => model.Ward), @Html.DisplayFor(model => model.District), @Html.DisplayFor(model => model.Province)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-4 px-1">
+                                @Html.ActionLink("Chỉnh Sửa", "HouseEdit", new { HouseID = Model.HouseID }, new { @class = "btn btn-primary btn-block btn-sm" })
+                            </div>
+                            <div class="col-4 px-1">
+                                @Html.ActionLink("Hình Ảnh", "HousePicture", new { HouseID = Model.HouseID }, new { @class = "btn btn-success btn-block btn-sm" })
+                            </div>
+                            <div class="col-4 px-1">
+                                @Html.ActionLink("Dịch Vụ", "HouseService", new { HouseID = Model.HouseID }, new { @class = "btn btn-danger btn-block btn-sm" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".image").hover(
+        function () {
+            var url = $(this).css("background-image");
+            $("#image-main").css("background-image", url);
+        },
+    );
+
+</script>

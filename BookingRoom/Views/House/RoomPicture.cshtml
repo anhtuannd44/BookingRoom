@@ -1,0 +1,112 @@
+﻿@model IEnumerable<BookingRoom.Models.PictureRoom>
+@{
+    ViewBag.Title = "Hình Ảnh Phòng";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-8 col-12">
+        <div class="container shadow">
+            <div class="row main-image">
+                <div class="col-md-12 col-12 p-1">
+                    <div class="image-box ratio-16-9 rounded">
+                        <div class="image image-big" id="image-main" style="background-image: url('../../Content/images/Room/@ViewBag.MainPicture');"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-image shadow bg-dark py-2">
+                @if (ViewBag.IsPictureRooom == "1")
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-4 p-1 mb-3 rounded">
+                            <div class="image-box ratio-16-9 rounded">
+                                <div class="image image-small" id="image-1" style="background-image: url('../../Content/Images/Room/@item.Name');"></div>
+                            </div>
+                            @if (item.IsMainPicture == false)
+                            {
+                                @Html.ActionLink("Chọn Làm Hình Chính", "SetMainPictureRoom", new { RoomID = ViewBag.RoomID, PictureID = item.PictureRoomID }, new { @class = "small btn btn-block btn-light px-0 py-2 mt-2" })
+                            }
+                            else
+                            {
+                                <a href="#" class="small btn btn-block btn-primary px-0 py-2 mt-2">Hình Chính</a>
+                            }
+                            <div class="text-center">
+                                @Html.ActionLink("Xóa hình này", "DeletePictureRoom", new { RoomID = ViewBag.RoomID, PictureID = item.PictureRoomID }, new { @class = "small text-center text-light px-0 py-2 mt-2" })
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <p class="text-danger text-center">Bạn chưa có hình nào. Đăng hình của bạn lên ngay thôi!</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="font-weight-bold text-primary">Thêm Hình Ảnh</h3>
+                <hr />
+                <p class="card-description">
+                    Thêm tối đa 6 hình ảnh
+                    </br>Bạn còn thêm được <span class="text-primary">@ViewBag.MinPictureUpload</span> hình nữa
+                </p>
+                <p class="text-danger">@ViewBag.Noti</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="avatar-preview image-box ratio-16-9 rounded">
+                            <div id="imagePreview" class="imagePreview image">
+                            </div>
+                        </div>
+                        <div class="avatar-edit mt-2">
+                            @using (Html.BeginForm("UploadImgRoom", "House", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input hidden name="RoomID" id="RoomID" value="@ViewBag.RoomID" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="btn btn-success btn-sm btn-block">
+                                            Chọn Hình
+                                            <input name="imageUpload" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" style="width: 0px;height: 0px;overflow: hidden;" />
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary btn-block btn-sm">Đăng Hình</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="@Url.Action("RoomDetail","House", new {RoomID = ViewBag.RoomID })" class="btn btn-secondary btn-block btn-sm">Quay Lại</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload").change(function () {
+        readURL(this);
+    });
+</script>
+<style>
+    .imagePreview {
+        background: url('../../Content/images/Hotel/default.jpg');
+    }
+</style>

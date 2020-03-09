@@ -1,0 +1,148 @@
+﻿@model BookingRoom.Models.House
+
+@{
+    ViewBag.Title = "Tạo Nhà Nghỉ";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Thêm nhà nghỉ của bạn</h4>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.UserID, new { @Value = ViewBag.UserID })
+                    @Html.HiddenFor(model => model.Payment, new { @Value = "Cash" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" for="Province">Tỉnh/Thành Phố</label>
+                        <div class="col-sm-9">
+                            @Html.DropDownList("Province", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" for="District">Quận/Huyện</label>
+                        <div class="col-sm-9">
+                            <select id="District" name="District" class="form-control" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" for="Ward">Xã/Phường/Thị Trấn</label>
+                        <div class="col-sm-9">
+                            <select id="Ward" name="Ward" class="form-control" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Intro, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Intro, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Intro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-3 col-sm-9">
+                            <input type="submit" value="Tạo Nhà Nghỉ" class="btn btn-primary" />
+                            @Html.ActionLink("Quay Lại", "Houses", "House", null, new { @class = "btn btn-secondary ml-2" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hướng Dẫn</h4>
+                <ul class="list-arrow">
+                    <li>Điền đầy đủ thông tin các mục sau đó nhấn Tạo Nhà Nghỉ để hoàn tất đăng ký nhà nghỉ của bạn.</li>
+                    <li>Kiểm tra đầy đủ thông tin chính xác, vì đây là quyền lợi cũng như thông tin để khách hàng tìm thấy bạn.</li>
+                    <li>Chúng tôi sẽ tiến hành kiểm duyệt và cho phép nhà nghỉ bạn xuất hiện sớm nhất.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        //Invoke jQuery function of First DDL change
+        $('#Province').change(function () {
+            //Get ID of selected Province
+            var province = $(this).val();
+            // send selected ID to controller using Ajax
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "GetDistrict", // URL to fetch second ddl
+                data: "province=" + province,
+                success: function (data) {
+                    //append the data in second dropdown by creating html using jquery
+                    $('#District').empty();
+                    $('#District').append('<option selected="selected" value="">Chọn Quận/Huyện</option>')
+                    $.each(data, function (i, d) {
+                        $('#District').append('<option value="' + d.name + '">' + d.name + '</option>');
+                    });
+
+                },
+                failure: function (data) {
+                    alert('error occured');
+                }
+
+            });
+        });
+    });
+    $(function () {
+        //Invoke jQuery function of First DDL change
+        $('#District').change(function () {
+            //Get ID of selected Province
+            var district = $(this).val();
+            // send selected ID to controller using Ajax
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "GetWard", // URL to fetch second ddl
+                data: "district=" + district,
+                success: function (data) {
+                    //append the data in second dropdown by creating html using jquery
+                    $('#Ward').empty();
+                    $('#Ward').append('<option selected="selected" value="">Chọn Xã/Phường/Thị Trấn</option>')
+                    $.each(data, function (i, d) {
+                        $('#Ward').append('<option value="' + d.name + '">' + d.name + '</option>');
+                    });
+
+                },
+                failure: function (data) {
+                    alert('error occured');
+                }
+
+            });
+        });
+    });
+</script>

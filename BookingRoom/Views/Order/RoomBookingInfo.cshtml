@@ -1,0 +1,146 @@
+﻿@model BookingRoom.Models.BookingContact
+
+@{
+    ViewBag.Title = "Thông Tin Đặt Phòng";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+    var total = (ViewBag.Room.Price + ViewBag.Room.Price * 0.15).ToString("0,0 đ");
+}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="sticky-top" style="top:76px; z-index:9;">
+                <div class="card shadow border rounded-0 mb-4">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-3 my-auto">
+                                <div class="image-box ratio-1-2 my-auto">
+                                    <div class="image image-big border border-right-0 rounded" id="image-main" style="background-image: url('../../Content/images/Hotel/@ViewBag.HotelCover');"></div>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="mb-2 text-primary font-weight-bold">@ViewBag.Room.House.Name</h5>
+                                <hr width="30%" class="ml-0 my-2">
+                                <p class="card-description text-info my-0 small">@ViewBag.Room.House.Street, @ViewBag.Room.House.Ward, @ViewBag.Room.House.District, @ViewBag.Room.House.Province</p>
+                                <hr width="30%" class="ml-0 my-2">
+                                <div class="payment">
+                                    <div class="service-title">
+                                        <h5 class="small font-weight-bold mb-1">Dịch Vụ Thanh Toán</h5>
+                                    </div>
+                                    <h5 class="m-0 small">
+                                        <i class="mdi mdi-credit-card"></i>
+                                        Không cần thẻ tín dụng
+                                    </h5>
+                                    <h5 class="m-0 small">
+                                        <i class="mdi mdi-cash-usd"></i>
+                                        Thanh toán khi trả phòng
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-description text-danger small"> </p>
+                    </div>
+
+                </div>
+                <div class="card shadow border rounded-0">
+                    <div class="position-absolute py-1 px-2 bg-primary font-weight-bold text-white label-room-info" style="left: -8px">
+                        <p class="m-0">Thông Tin Phòng Đặt</p>
+                    </div>
+                    <div class="card-body p-3 mt-4">
+                        <h5 class="mb-2 text-primary font-weight-bold">@ViewBag.Room.TypeOfRoom.Name</h5>
+                        <hr width="30%" class="ml-0 my-2">
+                        <p class="card-description my-0 <small></small> font-weight-bold">Thời gian: <span class="text-info"> Đang cập nhật</span></p>
+                        <p class="card-description my-0 small font-weight-bold">Số phòng: <span class="text-info"> Đang cập nhật</span></p>
+                        <p class="card-description my-0 small font-weight-bold">Số người: <span class="text-info"> Đang cập nhật</span></p>
+                        <hr width="30%" class="ml-0 my-2">
+                        <table class="table table-bordered">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="text-left p-2">Nội dung</th>
+                                    <th class="text-right p-2">Số tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left p-2">Giá gốc</td>
+                                    <td class="text-right p-2 text-primary"><del>@ViewBag.Room.Price.ToString("0,0 đ")</del></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left p-2">Giảm giá</td>
+                                    <td class="text-right p-2">0đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left p-2">Phí đặt trước</td>
+                                    <td class="text-right p-2 text-success">MIỄN PHÍ</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-light">
+                                <tr>
+                                    <td class="text-left p-2">TỔNG CỘNG</td>
+                                    <td class="text-right p-2 font-weight-bold">@total</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <p class="text-dark small mt-1">Giá đã bao gồm: <span class="font-weight-bold">Phí dịch vụ 5%, thuế 10%</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-12">
+            <div class="card shadow border rounded-0">
+                <div class="card-body">
+                    <h3 class="font-weight-bold mb-3">Nhập thông tin của bạn</h3>
+                    <p class="card-description text-danger small">Hiện tại, chức năng đặt phòng đang nâng cấp, chúng tôi sẽ liên hệ ngay sau khi bạn cung cấp thông tin hoàn tất và tiến hành đặt phòng cho bạn! </p>
+                    @using (Html.BeginForm("RoomBookingInfo", "Order", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.RoomID)
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.PersonName)
+                                @Html.EditorFor(model => model.PersonName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PersonName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Address)
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.PhoneNumber)
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.Messenger)
+                                @Html.TextAreaFor(model => model.Messenger, new { @class = "form-control", @rows = "10", @placeholder = "Ngày nhận phòng, ngày trả phòng, các yêu cầu thêm, ..." })
+                                @Html.ValidationMessageFor(model => model.Messenger, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success float-right">Đặt Phòng Ngay</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer">
+                    <h5 class="mb-0">Chúng tôi sẽ gửi Email vào Email quý vị cung cấp sau khi nhập thông tin hoàn tất!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+}

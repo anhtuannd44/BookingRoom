@@ -1,0 +1,116 @@
+﻿@model BookingRoom.Models.Room
+
+@{
+    ViewBag.Title = "Tạo Phòng Của Bạn";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Thêm phòng cho nhà <span class="text-danger">@ViewBag.HouseName</span></h4>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.HouseID, new { @Value = ViewBag.HouseID })
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "VD: Phòng 102" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.TypeOfRoomID, "Loại Phòng", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.DropDownList("TypeOfRoomID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TypeOfRoomID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-12 col-form-label">Hình Thức Cho Thuê</label>
+                            <div class="col-sm-3 col-4 px-0 pl-3">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="RentType" id="RentType" value="0">Ngắn Hạn<i class="input-helper"></i>
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-4 px-0 pl-1">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="RentType" id="RentRoom" value="1" checked="">Dài Hạn<i class="input-helper"></i>
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-4 px-0 pl-1">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="RentType" id="RentRoom" value="2" checked="">Cả Hai<i class="input-helper"></i>
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(model => model.SalePrice, new { id = "SalePrice", Value = "0" })
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                <select class="form-control" id="Status" name="Status">
+                                    <option value="true">Sẵn Sàng</option>
+                                    <option value="false">Chưa Sẵn Sàng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.MaxChildren, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.MaxChildren, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaxChildren, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-3 col-sm-9">
+                                <input type="submit" value="Tạo Phòng" class="btn btn-primary" />
+                                <a href="@Url.Action("Rooms","House", new { HouseID = ViewBag.HouseID })" class="btn btn-secondary">Quay Lại</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hướng Dẫn</h4>
+                <ul class="list-arrow">
+                    <li>Điền đầy đủ thông tin các mục sau đó nhấn Tạo Nhà Nghỉ để hoàn tất đăng ký nhà nghỉ của bạn.</li>
+                    <li>Kiểm tra đầy đủ thông tin chính xác, vì đây là quyền lợi cũng như thông tin để khách hàng tìm thấy bạn.</li>
+                    <li>Chúng tôi sẽ tiến hành kiểm duyệt và cho phép nhà nghỉ bạn xuất hiện sớm nhất.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BookingRoom.Models.House>
+
+@{
+    ViewBag.Title = "Nhà Của Bạn";
+    Layout = "~/Views/Shared/House/_ManageLayout.cshtml";
+    var dem = 0;
+    var PictureUrl = "default.jpg";
+}
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="@Url.Action("CreateHouse","House")" class="btn btn-sm btn-success btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i> Thêm Nhà Của Bạn
+        </a>
+        <p>@ViewBag.Noti</p>
+    </div>
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <div class="card bg-light shadow">
+                <div class="product-grid7">
+                    @if (ViewBag.Picture.ToString() == "")
+                    { 
+                        PictureUrl = "default.jpg";
+                    }
+                    else
+                    {
+                        foreach (var i in ViewBag.Picture)
+                        {
+                            if (item.HouseID == i.HouseID)
+                            {
+                                dem++;
+                                PictureUrl = i.Name;
+                                break;
+                            }
+                        }
+                    }
+                    <div class="product-image7 rounded-top" style="background-image: url('../../Content/images/Hotel/@PictureUrl');">
+                        <ul class="social">
+                            <li><a href="@Url.Action("HouseDetail","House", new {houseid = item.HouseID })" data-tip="Chỉnh Sửa"><i class="mdi mdi-hospital-building"></i></a></li>
+                            <li><a href="@Url.Action("Rooms","House", new {houseid = item.HouseID })" data-tip="Xem Phòng"><i class="mdi mdi-eye"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content p-2">
+                        <h4 class="title"><a href="@Url.Action("HouseDetail","House", new {houseid = item.HouseID })" class="text-primary">@Html.DisplayFor(modelItem => item.Name)</a></h4>
+                        <div class="text-muted">
+                            <p class="small mb-1">
+                                @Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.Ward), @Html.DisplayFor(modelItem => item.District), @Html.DisplayFor(modelItem => item.Province)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        PictureUrl = "default.jpg";
+    }
+</div>

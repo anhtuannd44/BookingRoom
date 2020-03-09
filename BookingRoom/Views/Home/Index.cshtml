@@ -1,0 +1,393 @@
+﻿@model BookingRoom.Models.SearchingViewModel
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/Home/_HomeLayout.cshtml";
+}
+@*<div class="col-lg-4 p-3 shadow" style=" border-radius: 5px; background: rgba(255,255,255,.9);">
+            <div class="form-horizontal mt-2" style="zoom: 0.9">
+                <ul class="nav nav-tabs px-3" role="tablist">
+                    <li class="nav-item m-auto">
+                        <a class="btn btn-outline-primary active" data-toggle="tab" href="#nganhan">Ở Ngắn Hạn</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a class="btn btn-outline-success" data-toggle="tab" href="#daihan">Ở Dài Hạn</a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3">
+                    <div id="nganhan" class="container tab-pane active">
+                        @using (Html.BeginForm("SearchingResult", "Home"))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="SearchKey" name="SearchKey" required="required" placeholder="Nhập địa điểm">
+                            </div>
+                            <div class="form-group">
+                                <label for="DateCheckIn">Ngày Nhận Phòng</label>
+                                <div class="input-group date" id="DateCheckIn" data-target-input="nearest">
+                                    <input id="DateCheckIn" name="DateCheckIn" type="text" class="form-control datetimepicker-input" data-target="#DateCheckIn" />
+                                    <div class="input-group-append" data-target="#DateCheckIn" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="mdi mdi-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="DateCheckOut">Ngày Trả Phòng</label>
+                                <div class="input-group date" id="DateCheckOut" data-target-input="nearest">
+                                    <input id="DateCheckOut" name="DateCheckOut" type="text" class="form-control datetimepicker-input" data-target="#DateCheckOut" />
+                                    <div class="input-group-append" data-target="#DateCheckOut" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="mdi mdi-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RoomCount">Số Phòng</label>
+                                <select class="form-control text-center" id="RoomCount" name="RoomCount">
+                                    @{
+                                        for (int i = 1; i <= 30; i++)
+                                        {
+                                            if (i == ViewBag.RoomCount)
+                                            {
+                                                <option value="@i" selected>@i phòng</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i phòng</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <button class="btn btn-primary btn-block" type="submit">Tìm Kiếm</button>
+                            </div>
+                        }
+                    </div>
+                    <div id="daihan" class="container tab-pane fade">
+                        @using (Html.BeginForm("Searching", "Home", FormMethod.Get))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="SearchKey" name="SearchKey" required="required" placeholder="Nhập địa điểm">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="timecheckin">Ngày Muốn Thuê</label>
+                                <input type="date" class="form-control" id="timecheckin" name="SearchKey" required="required">
+                            </div>
+                            <div class="form-group mt-3">
+                                <button class="btn btn-primary btn-block" type="submit">Tìm Kiếm</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-7 offset-lg-1 mt-lg-5">
+        <div class="m-auto mt-lg-5">
+            <h1 class="text-center text-white" style="font-weight: 800">CHUỖI HOMESTAY - PHÒNG TRỌ CAMHOUSE & HƠN THẾ NỮA</h1>
+            <h4 class="text-light font-weight-bold text-center">Nhận giá tốt nhất cho >1.000 chỗ nghỉ CamHouse trên toàn Việt Nam</h4>
+            <h5 class="text-light text-center">Cùng trải nghiệm ngay thôi nào!</h5>
+        </div>
+    </div>*@
+<div id="CamHouseSlider" class="carousel slide home" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @{var i = 0;}
+        @foreach (var item in ViewBag.Slider)
+        {
+            if (i == 0)
+            {
+                <li data-target="#CamHouseSlider" data-slide-to="@i" class="active"></li>
+            }
+            <li data-target="#CamHouseSlider" data-slide-to="@i"></li>
+            i++;
+        }
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        @{i = 0;}
+        @foreach (var item in ViewBag.Slider)
+        {
+            if (i == 0)
+            {
+                <div class="carousel-item active" style="background-image: url('../Content/images/Slider/@(item.SliderID).jpg')">
+                    <div class="carousel-caption" style="bottom: 10%;">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto py-3 px-4 text-dark border border-primary" style="background: rgba(255,255,255,.78)">
+                                <h2 class="display-4 text-primary font-weight-bold">@item.Title</h2>
+                                <hr width="15%" style="border-top-width: 2px; border-color: #ff6a00" />
+                                <p class="">@item.Content</p>
+                                <a href="@item.ButtonLink1" class="btn btn-primary btn-sm px-md-2 px-1 rounded-0 mb-2">@item.ButtonContent1</a>
+                                <a href="@item.ButtonLink1" class="btn btn-outline-primary btn-sm px-md-2 px-1 rounded-0 mb-2">@item.ButtonContent2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="carousel-item" style="background-image: url('../Content/images/Slider/@(item.SliderID).jpg')">
+                    <div class="carousel-caption" style="bottom: 10%;">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto py-3 px-4 text-dark border border-primary" style="background: rgba(255,255,255,.78)">
+                                <h2 class="display-4 text-primary font-weight-bold">@item.Title</h2>
+                                <hr width="15%" style="border-top-width: 2px; border-color: #ff6a00" />
+                                <p class="">@item.Content</p>
+                                <a href="@item.ButtonLink1" class="btn btn-primary btn-sm px-md-2 px-1 rounded-0 mb-2">@item.ButtonContent1</a>
+                                <a href="@item.ButtonLink1" class="btn btn-outline-primary btn-sm px-md-2 px-1 rounded-0 mb-2">@item.ButtonContent2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            i++;
+        }
+
+    </div>
+    <a class="carousel-control-prev" href="#CamHouseSlider" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#CamHouseSlider" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<section class="container-fluid bg-light border-top py-md-5 py-2">
+    <div class="container py-1">
+        <div class="row">
+            <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <a href="@Url.Action("Houses","Home",new { location="Thành Phố Hồ Chí Minh" })" class="btn btn-outline-primary btn-block rounded-0">
+                    <h4>CAMHOUSE TẠI TP HCM</h4>
+                    <p class="m-0 text-dark">Xem ngay hơn 100 phòng</p>
+                </a>
+            </div>
+            <div class="col-md-4 col-12 mb-2 mb-md-0">
+                <a href="@Url.Action("Houses","Home",new { location="Nha Trang" })" class="btn btn-outline-primary btn-block rounded-0">
+                    <h4>CAMHOUSE TẠI NHA TRANG</h4>
+                    <p class="m-0 text-dark">Xem ngay hơn 100 phòng</p>
+                </a>
+            </div>
+            <div class="col-md-4 col-12 mb-2 mb-md-0">
+                <a href="@Url.Action("Houses","Home",new { location="Đà Lạt" })" class="btn btn-outline-primary btn-block rounded-0">
+                    <h4>CAMHOUSE TẠI ĐÀ LẠT</h4>
+                    <p class="m-0 text-dark">Xem ngay hơn 100 phòng</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid bg-white py-md-5 py-2">
+    <div class="container">
+        <h2 class="text-center mb-md-4 md-1 text-primary">KHÁM PHÁ CAMHOUSE</h2>
+        <hr class="bg-dark my-md-1 my-2" width="60" style="height:2px" />
+        <div class="row text-center">
+            <div class="col-md-4 border-right-md border-right-lg home-info p-md-3 p-2">
+                <i class="mdi mdi-home text-primary" style="font-size: 60px"></i>
+                <h4 class="service-heading text-success mb-3 font-weight-bold">Lưu Trú</h4>
+                <p class="text-muted">Tìm nơi nghỉ chân hoàn hảo, dịch vụ tuyệt vời từ hệ thống hơn 1000 phòng Camhouse trên toàn quốc...</p>
+            </div>
+            <div class="col-md-4 border-right-md border-right-lg home-info p-md-3 p-2">
+                <i class="mdi mdi-airplane-takeoff text-primary" style="font-size: 60px"></i>
+                <h4 class="service-heading text-success mb-3 font-weight-bold">Trải Nghiệm</h4>
+                <p class="text-muted">Không chỉ lưu trú, quý khách còn có thể tham gia những tour trải nghiệm, du lịch trên toàn đất nước Việt Nam và nước ngoài...</p>
+            </div>
+            <div class="col-md-4 home-info p-md-3 p-2">
+                <i class="mdi mdi-account-switch text-primary" style="font-size: 60px"></i>
+                <h4 class="service-heading text-success mb-3 font-weight-bold">Cộng Đồng</h4>
+                <p class="text-muted">Với hơn 100.000 thành viên cộng đồng Camhouse, đây thực sự là nơi giao lưu văn hóa, kiến thức, du lịch, ẩm thực, ... cho tất cả mọi người...</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-light py-md-5 py-2">
+    <div class="container">
+        <h2 class="text-success text-center mb-2">TOP PHÒNG TRỌ CAMHOUSE</h2>
+        <hr class="bg-dark mb-md-5 mb-1" width="60" style="height:2px" />
+        <div class="row text-center">
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Thành Phố Hồ Chí Minh" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hochiminh.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Tp. Hồ Chí Minh</h4>
+                        <div class="card-text">
+                            Hơn 1590 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a href="@Url.Action("Houses","Home",new { location="Thành Phố Hồ Chí Minh" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Hà Nội" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hanoi.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Hà Nội</h4>
+                        <div class="card-text">
+                            Hơn 990 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Houses","Home",new { location="Hà Nội" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Hội An" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hoian.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Hội An</h4>
+                        <div class="card-text">
+                            Hơn 480 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Houses","Home",new { location="Hội An" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Khánh Hòa" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/nhatrang.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Khánh Hòa</h4>
+                        <div class="card-text">
+                            Hơn 880 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Houses","Home",new { location="Khánh Hòa" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-light py-md-5 py-2">
+    <div class="container">
+        <h2 class="text-success text-center mb-2">TOP HOMESTAY - NHÀ NGHỈ CAMHOUSE</h2>
+        <hr class="bg-dark mb-md-5 mb-2" width="60" style="height:2px" />
+        <div class="row text-center">
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Thành Phố Hồ Chí Minh" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hochiminh.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Tp. Hồ Chí Minh</h4>
+                        <div class="card-text">
+                            Hơn 1590 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a href="@Url.Action("Houses","Home",new { location="Thành Phố Hồ Chí Minh" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Hà Nội" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hanoi.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Hà Nội</h4>
+                        <div class="card-text">
+                            Hơn 990 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a  href="@Url.Action("Houses","Home",new { location="Hà Nội" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Hội An" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/hoian.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Hội An</h4>
+                        <div class="card-text">
+                            Hơn 480 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Houses","Home",new { location="Hội An" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-white rounded shadow">
+                    <div class="image-box ratio-16-9">
+                        <a href="@Url.Action("Houses","Home",new { location="Khánh Hòa" })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/nhatrang.jpg');"></a>
+                    </div>
+                    <div class="card-block p-2">
+                        <h4 class="card-title font-weight-bold">Khánh Hòa</h4>
+                        <div class="card-text">
+                            Hơn 880 lượt đặt phòng trong tháng này
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Houses","Home",new { location="Khánh Hòa" })" class="btn btn-primary btn-block btn-sm">Khám Phá</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid bg-white py-md-5 py-2">
+    <div class="container">
+        <h2 class="text-center mb-2 text-primary">PHONG CÁCH CAMHOUSE</h2>
+        <hr class="bg-dark mb-2" width="60" style="height:2px" />
+        <div class="row text-center small">
+            <div class="col-md-4 col-6 border-right-md py-4">
+                <div class="image-box ratio-16-9 mb-4">
+                    <a href="@Url.Action("Index","Page",new { page=3 })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/khongiancam.jpg');"></a>
+                </div>
+                <a class="text-success mt-md-4 mt-2 h4 font-weight-bold" href="@Url.Action("Index","Page",new { page=3 })">Phong Cách CamHouse</a>
+                <p class="text-muted my-2">Tìm nơi nghỉ chân hoàn hảo, dịch vụ tuyệt vời từ hệ thống hơn 1000 phòng Camhouse trên toàn quốc...</p>
+            </div>
+            <div class="col-md-4 col-6 border-right-md py-4">
+                <div class="image-box ratio-16-9 mb-4">
+                    <a href="@Url.Action("Index","Page",new { page=9 })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/technology.jpg');"></a>
+                </div>
+                <a class="text-success mt-md-4 mt-2 h4 font-weight-bold" href="@Url.Action("Index","Page",new { page=9 })">Công Nghệ</a>
+                <p class="text-muted my-2">Không chỉ lưu trú, quý khách còn có thể tham gia những tour trải nghiệm, du lịch trên toàn đất nước Việt Nam và nước ngoài...</p>
+            </div>
+            <div class="col-md-4 col-6 py-4">
+                <div class="image-box ratio-16-9 mb-4">
+                    <a href="@Url.Action("Index","Page",new { page=2 })" class="image image-big" id="image-main" style="background-image: url('../../Content/images/stylecamhouse.jpg');"></a>
+                </div>
+                <a class="text-success mt-md-4 mt-2 h4 font-weight-bold" href="@Url.Action("Index","Page",new { page=2 })">Không Gian</a>
+                <p class="text-muted my-2">Với hơn 100.000 thành viên cộng đồng Camhouse, đây thực sự là nơi giao lưu văn hóa, kiến thức, du lịch, ẩm thực, ... cho tất cả mọi người...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<script type="text/javascript">
+        $(function () {
+            $('#DateCheckIn').datetimepicker({
+                format: 'L'
+            });
+            $('#DateCheckOut').datetimepicker({
+                useCurrent: false,
+                format: 'L'
+            });
+            $("#DateCheckIn").on("change.datetimepicker", function (e) {
+                $('#DateCheckOut').datetimepicker('minDate', e.date);
+            });
+            $("#DateCheckOut").on("change.datetimepicker", function (e) {
+                $('#DateCheckIn').datetimepicker('maxDate', e.date);
+            });
+        });
+    </script>*@

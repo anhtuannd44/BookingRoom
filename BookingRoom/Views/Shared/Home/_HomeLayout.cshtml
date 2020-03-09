@@ -1,0 +1,210 @@
+﻿@using BookingRoom.Models;
+@{
+
+    HouseModel db = new HouseModel();
+    var homepage = db.Homepage.FirstOrDefault();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - CamHouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/Logo-Cam-House-ICON.png" />
+    <link href="~/Content/vendors/css/vendor.bundle.base.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=1803473559955981&autoLogAppEvents=1"></script>
+    <header class="navbar navbar-expand bg-primary flex-column flex-md-row bd-navbar py-0">
+        <div class="container text-white">
+            <p class="title-header m-0 d-none d-md-block">CamHouse | Wherever You Go - Cam Is House</p>
+            <div class="navbar-nav-scroll ml-auto">
+                <ul class="navbar-nav bd-navbar-nav flex-row small">
+                    <li class="nav-item py-2">
+                        <a class="nav-link text-white py-0 border-right" href="@Url.Action("Houses","Home")">Xem Phòng</a>
+                    </li>
+                    <li class="nav-item py-2">
+                        <a class="nav-link text-white border-right py-0" href="@Url.Action("Index","Blog")">Tin Tức</a>
+                    </li>
+                    <li class="nav-item py-2">
+                        <a class="nav-link text-white border-right py-0" href="@Url.Action("Index","Page",new { page=5 })">Liên Hệ</a>
+                    </li>
+                    @Html.Partial("Home/_LoginHeaderPartial")
+                </ul>
+            </div>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-0 shadow sticky-top" id="sticky-bar">
+        <div class="container">
+            <a class="p-1 p-md-0" href="@Url.Action("Index","Home")">
+                <img src="~/Content/images/Logo-Cam-House.png" height="50" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarResponsive">
+                <ul class="navbar-nav ml-sm-auto">
+                    <li class="nav-item nav-li border-right">
+                        <a class="nav-link font-weight-bold py-lg-4" href="tel:@homepage.Hotline">
+                            Đặt Phòng: <span class="text-success font-weight-bold">@homepage.Hotline</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown border-right">
+                        <a class="nav-link dropdown-toggle py-lg-4" href="#" id="AboutDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Về Chúng Tôi</a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in small mt-1" aria-labelledby="AboutDropDown" style="z-index:999999999;">
+                            <a class="dropdown-item py-0" href="@Url.Action("Index","Page",new { page=1 })">
+                                <i class="mdi mdi-information-outline mr-2"></i>
+                                Giới Thiệu
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item py-0" href="@Url.Action("Index","Blog")">
+                                <i class="mdi mdi-book-open mr-2"></i>
+                                Tin Tức
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item py-0" href="@Url.Action("Index","Page",new { page=7})">
+                                <i class="mdi mdi-help-circle mr-2"></i>
+                                Hỏi - Đáp
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-li border-right">
+                        <a class="nav-link py-lg-4" href="@Url.Action("Index","Page",new { page=14})">Ưu Đãi Đặt Phòng</a>
+                    </li>
+                    <li class="nav-item nav-li">
+                        <a class="nav-link py-lg-4 text-primary" href="#">Trở Thành Chủ Nhà</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        @RenderBody()
+    </div>
+    <footer id="footer">
+        <section class="py-4" style="background: #363434">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 col-12 order-3 mt-md-0 mt-3 order-md-1">
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <h4 class="text-primary mb-0">CAM<span class="text-white">HOUSE</span></h4>
+                                <hr width="40" class="bg-light" />
+                            </div>
+                            <div class="col-12 flex-last">
+                                <nav class="nav flex-column small">
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page= 1 })">Giới Thiệu</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page= 1 })">Tuyển Dụng</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page= 6 })">Chính Sách</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page= 3 })">Hỗ Trợ</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page= 5 })">Liên Hệ</a>
+                                </nav>
+                            </div>
+                            <div class="col-12 my-3">
+                                <a href="@homepage.FacebookLink">
+                                    <button type="button" class="button btn btn-social-icon btn-facebook btn-rounded">
+                                        <i class="mdi mdi-facebook"></i>
+                                    </button>
+                                </a>
+                                <a href="@homepage.GoogleLink">
+                                    <button type="button" class="btn btn-social-icon btn-youtube btn-rounded">
+                                        <i class="mdi mdi-youtube"></i>
+                                    </button>
+                                </a>
+                                <a href="@homepage.YoutubeLink">
+                                    <button type="button" class="btn btn-social-icon btn-google btn-rounded">
+                                        <i class="mdi mdi-google-plus"></i>
+                                    </button>
+                                </a>
+                                <a href="mailto:@homepage.Email">
+                                    <button type="button" class="btn btn-social-icon btn-google btn-rounded">
+                                        <i class="mdi mdi-gmail"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 order-1 order-md-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="text-warning mb-0">Dành Cho Chủ Nhà</h4>
+                                <hr width="40" class="bg-light" />
+                            </div>
+                            <div class="col-12">
+                                <nav class="nav flex-column small">
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Blog",new {Category = 1 })">Cộng Đồng Chủ Nhà</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page=11 })">Điều Khoản - Điều Kiện</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page=12 })">Chính Sách Bảo Mật</a>
+                                    <a class="nav-link text-light p-0" href="@Url.Action("Index","Page",new { page=13 })">Dịch Vụ Cung Cấp</a>
+                                    <a class="nav-link text-light p-0" href="#">Đăng Ký Hợp Tác</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 order-2 order-md-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="text-warning mb-0">Các Đối Tác Chính</h4>
+                                <hr width="40" class="bg-light" />
+                            </div>
+                            <div class="col-12">
+                                <nav class="nav flex-column small">
+                                    <a class="nav-link text-light p-0" target="_blank" href="https://agoda.vn/">Agoda.com</a>
+                                    <a class="nav-link text-light p-0" target="_blank" href="https://booking.com/">Booking.com</a>
+                                    <a class="nav-link text-light p-0" target="_blank" href="https://luxstay.vn/">Luxstay.vn</a>
+                                    <a class="nav-link text-light p-0" target="_blank" href="https://trivago.vn/">Trivago.vn</a>
+                                    <a class="nav-link text-light p-0" target="_blank" href="https://traveloka.com/">Traveloka.com</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12 order-4">
+                        <div class="row">
+                            <div class="col-12 mx-auto">
+                                <div class="fb-page" data-href="https://www.facebook.com/camhousevietnam"
+                                     data-tabs="timeline"
+                                     data-width="700"
+                                     data-height="260"
+                                     data-small-header="true"
+                                     data-adapt-container-width="true"
+                                     data-hide-cover="false"
+                                     data-show-facepile="true">
+                                    <blockquote cite="https://www.facebook.com/camhousevietnam" class="fb-xfbml-parse-ignore">
+                                        <a href="https://www.facebook.com/camhousevietnam">Cam House</a>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-2" style="background: #242323;">
+            <div class="container">
+                <div class="row text-center" style="color: #bdbdbd">
+                    <div class="col-md-12">
+                        <p class="m-0 small">Mọi nội dung tại đây © 2019 - Công ty TNHH-TMDV CamHouse giữ toàn quyền</p>
+                        <p class="m-0 small">C  AMHOUSE - nhà cung cấp dịch vụ du lịch trực tuyến & các dịch vụ có liên quan hàng đầu Việt Nam</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    @*<script language="JavaScript" type="text/javascript" src="~/Content/js/moment.js"></script>
+        <script language="JavaScript" type="text/javascript" src="~/Content/js/locate.js"></script>
+        <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.js"></script>*@
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+
+

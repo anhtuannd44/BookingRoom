@@ -1,0 +1,80 @@
+﻿@{
+    var UserName = User.Identity.Name;
+}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index","Admin")">
+                <span class="menu-title">Quản Trị</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("HomeEdit","Admin")">
+                <span class="menu-title">Cài Đặt Trang Chủ</span>
+                <i class="mdi mdi-book-open menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("SliderEdit","Admin")">
+                <span class="menu-title">Slider</span>
+                <i class="mdi mdi-book-open menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#PageContent" aria-controls="ui-basic">
+                <span class="menu-title">Nội Dung Trang Con</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+            </a>
+            <div class="collapse" id="PageContent">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 1})">Trang Giới Thiệu</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 8})">Trang Hỗ Trợ</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 6})">Điều Khoản - Chính Sách</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 5})">Trang Liên Hệ</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#CamHouseStyle" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Phong Cách CamHouse</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+            </a>
+            <div class="collapse" id="CamHouseStyle">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 3})">Phong Cách CamHouse</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 9})">Công Nghệ</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("PageEdit","Admin",new{ Page = 2})">Không Gian CamHouse</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ListPage" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Quản Lý Trang</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+            </a>
+            <div class="collapse" id="ListPage">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("CreatePage","Admin")">Tạo Trang Mới</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("ListPage","Admin")">Danh Sách Trang</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#Blog" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Tin Tức</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+            </a>
+            <div class="collapse" id="Blog">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Blogs","Admin")">Bài Viết</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("BlogCategories","Admin")">Chuyên Mục</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,41 @@
+﻿@model BookingRoom.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutSearchInfo.cshtml";
+}
+
+<div class="container mb-5" style=" margin-top: 120px;">
+    <h3 class="text-primary text-center my-5">Thông Tin Tài Khoản</h3>
+    <div class="row my-2">
+        <div class="col-lg-3 text-center">
+            <img src="~/Content/img/profile.png" class="mx-auto img-fluid img-circle d-block mb-3" alt="avatar" />
+            <a href="@Url.Action("changepassword","Profile")" class="btn btn-outline-primary btn-block btn-sm">Đổi Mật Khẩu</a>
+            <a href="@Url.Action("YourBooking","Profile")" class="btn btn-outline-primary btn-block btn-sm">Lịch Sử Đặt Phòng</a>
+
+        </div>
+        <div class="col-lg-9">
+            <h5 class="mb-4">@Model.FullName</h5>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h6>Email: <strong>@Model.Email</strong></h6>
+                    <h6>Địa chỉ: <strong>@Model.Address</strong></h6>
+                    <h6>Số điện thoại: <strong>@Model.PhoneNumber</strong></h6>
+                    <h6>
+                        Giới tính:
+                        @if (Model.Gender == 1)
+                        {
+                            <strong>Nam</strong>
+                        }
+                        else
+                        {
+                            <strong>Nữ</strong>
+                        }
+                    </h6>
+                    <h6>Ngày sinh: <strong>@string.Format("{0:dd/MM/yyyy}", Model.Birthday).ToString()</strong></h6>
+                    <a href="" class="btn btn-outline-primary mt-3">Chỉnh Sửa Thông Tin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

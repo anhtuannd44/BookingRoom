@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - CamHouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/Logo-Cam-House-ICON.png" />
+
+    </head>
+<body>
+    <div class="container-scroller">
+        @Html.Partial("House/_HeaderPartial")
+        <div class="container-fluid page-body-wrapper">
+            @Html.Partial("House/_SidebarPartial")
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="page-header">
+                        <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                                <i class="mdi mdi-home"></i>
+                            </span> @ViewBag.Title
+                        </h3>
+                    </div>
+                    @RenderBody()
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a class="text-primary" href="https://facebook.com/camhouse.vn" target="_blank">CamHouse</a>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <div style="position:fixed; right: 10px; bottom: 10px; z-index: 999999999">
+        <a href="#" title="Lên Đầu Trang">
+            <i class="mdi mdi-arrow-up-drop-circle text-primary" style="font-size: 300%"></i>
+        </a>
+    </div>
+    <script type="text/javascript" src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    <script type="text/javascript" src="~/Content/vendors/chart.js/Chart.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/off-canvas.js"></script>
+    <script type="text/javascript" src="~/Content/js/hoverable-collapse.js"></script>
+    <script type="text/javascript" src="~/Content/js/misc.js"></script>
+    <script type="text/javascript" src="~/Content/js/dashboard.js"></script>
+    <script type="text/javascript" src="~/Content/js/todolist.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
